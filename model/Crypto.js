@@ -9,36 +9,35 @@ const CryptoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  data: [{
-    date: {
+  date: {
       type: Date,
       required: true
     },
-    high: {
+  high: {
       type: Number,
       required: true
     },
-    low: {
+  low: {
       type: Number,
       required: true
     },
-    open: {
+  open: {
       type: Number,
       required: true
     },
-    close: {
+  close: {
       type: Number,
       required: true
     },
-    volume: {
+  volume: {
       type: Number,
       required: true
     },
-    marketcap: {
+  marketcap: {
       type: Number,
       required: true
     }
-  }]
+  
 });
 
-module.exports = Crypto = mongoose.model('crypto', CryptoSchema);
+module.exports = Crypto = mongoose.model('Crypto', CryptoSchema);

@@ -7,35 +7,35 @@ const CryptoSchema = new mongoose.Schema({
   },
   symbol: {
     type: String,
-    // required: true
+    required: true
   },
   date: {
       type: Date,
-      // required: true
+      required: true
     },
   high: {
       type: Number,
-      // required: true
+      required: true
     },
   low: {
       type: Number,
-      // required: true
+      required: true
     },
   open: {
       type: Number,
-      // required: true
+      required: true
     },
   close: {
       type: Number,
-      // required: true
+      required: true
     },
   volume: {
       type: Number,
-      // required: true
+      required: true
     },
   marketcap: {
       type: Number,
-      // required: true
+      required: true
     }
   
 });

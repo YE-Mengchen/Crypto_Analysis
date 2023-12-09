@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const {connectDB, closeDB} = require('./config/db');
 
 const app = express();
@@ -7,6 +8,8 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.get('/', (req, res) => res.send('API Running'));
 

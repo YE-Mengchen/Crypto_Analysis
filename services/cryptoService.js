@@ -69,7 +69,7 @@ async function fetchCryptoDataByDate(symbol, date) {
       }));
   
       return cryptoDataWithChanges.sort((a, b) => {
-        if (sortBy === 'name') {
+        if (sortBy === 'symbol') {
           return sortOrder === 'asc' ? a.symbol.localeCompare(b.symbol) : b.symbol.localeCompare(a.symbol);
         } else {
           const sortValueA = a[sortBy];
@@ -85,7 +85,7 @@ async function fetchCryptoDataByDate(symbol, date) {
   }
   
 
-  
+
 
 
 

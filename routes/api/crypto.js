@@ -19,20 +19,15 @@ router.get('/', async (req, res) => {
 );
 
 
-//@route GET api/data/marketcap-desc
+//@route GET api/data/sorted-cryptos
 //@desc Order the crypto by its market cap in descending mode, only return today's data
 //@access Public
-router.get('/marketcap-desc', async (req, res) => {
+router.get('/sorted-cryptos', async (req, res) => {
     try {
-        // Get latest date
-        const latestCrypto = await Crypto.findOne().sort({ date: -1 });
-        // check where latestCrypto exist or not
-        if (!latestCrypto) {
-            res.status(404).send('No data found');
-        }
-        const latestDate = latestCrypto.date;
-        // Get
-        const toReturn = await cryptoService.getSortedCryptoData(sortOrder = 'desc', sortBy = 'marketcap');
+        // Get parameters used to ranking from request
+        const sortOrder = req.query.sortOrder || 'desc';
+        const sortBy = req.query.sortBy || 'marketcap';
+        const toReturn = await cryptoService.getSortedCryptoData(sortOrder, sortBy);
         res.status(200).send(toReturn);
 
     } catch(err) {

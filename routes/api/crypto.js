@@ -16,9 +16,10 @@ router.get('/', async (req, res) => {
             res.status(500).send('Server Error');  
         }
     }
-)
+);
 
-//@route GET api/data/default
+
+//@route GET api/data/marketcap-desc
 //@desc Order the crypto by its market cap in descending mode, only return today's data
 //@access Public
 router.get('/marketcap-desc', async (req, res) => {
@@ -30,13 +31,9 @@ router.get('/marketcap-desc', async (req, res) => {
             res.status(404).send('No data found');
         }
         const latestDate = latestCrypto.date;
-
-        const toReturn = await cryptoService.calculatePriceChange("BTC", 30, latestDate);
-        console.log(toReturn);
-
+        // Get
+        const toReturn = await cryptoService.getSortedCryptoData(sortOrder = 'desc', sortBy = 'marketcap');
         res.status(200).send(toReturn);
-
-
 
     } catch(err) {
         console.error(err.message);

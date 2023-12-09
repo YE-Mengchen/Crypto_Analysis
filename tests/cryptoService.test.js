@@ -1,5 +1,5 @@
 const Crypto = require('../model/Crypto'); 
-const { fetchCryptoDataByDate } = require('../services/cryptoService');
+const { fetchCryptoDataByDate, calculatePriceChange, getSortedCryptoData } = require('../services/cryptoService');
 const {connectDB, closeDB} = require('../config/db');
 
 beforeAll(async () => {
@@ -9,8 +9,6 @@ beforeAll(async () => {
 afterAll(async() => {
     await closeDB();
 });
-
-
 
 
 
@@ -31,3 +29,43 @@ describe('Test fetchCryptoDataByDate Function', () => {
     expect(result.marketcap).toEqual(expectedData.marketcap);
   });
 });
+
+describe('Test calculatePriceChange Function', () => {
+    it('should return correct price change data for BTC for the past 30 days ending on 2021-07-06', async () => {
+      const symbol = 'BTC';
+      const days = 30;
+      const endDate = new Date('2021-07-06T23:59:59.000Z');
+  
+      const expectedData = {
+        symbol: 'BTC',
+        startPrice: 35862.37772747,
+        endPrice: 34235.19345116,
+        change: '-1627.18',
+        percentageChange: '-4.54'
+      };
+  
+      const result = await calculatePriceChange(symbol, days, endDate);
+  
+      expect(result).toBeDefined();
+      expect(result.startPrice).toEqual(expectedData.startPrice);
+      expect(result.endPrice).toEqual(expectedData.endPrice);
+      expect(result.change).toEqual(expectedData.change);
+      expect(result.percentageChange).toEqual(expectedData.percentageChange);
+    });
+  });
+
+
+  describe('Test getSortedCryptoData Function', () => {
+    it('should return cryptos sorted by marketcap in descending order', async () => {
+      const expectedOrder = ['BTC', 'ETH', 'USDT', 'BNB', 'ADA', 'XRP', 'DOGE', 'USDC', 'DOT', 'UNI', 'SOL', 'LTC', 'LINK', 'WBTC', 'XLM', 'TRX', 'AAVE', 'XMR', 'EOS', 'CRO', 'ATOM', 'MIOTA', 'XEM'];
+      const sortedCryptos = await getSortedCryptoData('desc', 'marketcap');
+      const symbols = sortedCryptos.map(crypto => crypto.symbol);
+      
+      expect(symbols).toEqual(expectedOrder);
+    });
+  });
+
+
+
+
+

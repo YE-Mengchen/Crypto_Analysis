@@ -31,16 +31,10 @@ router.get('/marketcap-desc', async (req, res) => {
         }
         const latestDate = latestCrypto.date;
 
-        // Get Date Object of seven and thirty days ago 
-        const oneDayAgo = new Date(latestDate.getTime() - (1 * 24 * 60 * 60 * 1000));
-        const sevenDaysAgo = new Date(latestDate.getTime() - (7 * 24 * 60 * 60 * 1000));
-        const thirtyDaysAgo = new Date(latestDate.getTime() - (30 * 24 * 60 * 60 * 1000));
-
-        
-        const toReturn = await cryptoService.calculatePriceChange("BTC", oneDayAgo, latestDate);
+        const toReturn = await cryptoService.calculatePriceChange("BTC", 30, latestDate);
+        console.log(toReturn);
 
         res.status(200).send(toReturn);
-    
 
 
 

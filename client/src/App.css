@@ -1,30 +1,118 @@
 /* App.css */
-
-/* Table styles */
-table {
+/* Here I use chat-GPT4 to write CSS code to improve appearance*/
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Dropdown and Sort label styles */
+  .dropdown-label {
+    margin-right: 10px;
+  }
+  
+  /* Table styles */
+  table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
   
   th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
+    font-size: 0.9em;
   }
   
   th {
-    background-color: #f2f2f2;
+    background-color:#add8e6; ;
+    color: white;
+    white-space: nowrap;
   }
   
-  tr:nth-child(even){background-color: #f9f9f9;}
+  tr:nth-child(even) { background-color: #f9f9f9; }
   
-  tr:hover {background-color: #eaeaea;}
+  tr:hover { background-color: #eaeaea; }
   
   /* Loading indicator styles */
   .loading {
     text-align: center;
     padding: 20px;
     font-size: 24px;
+    color: #000000;
+  }
+  
+  /* Color classes for price changes */
+  .positive {
+    color: #28a745;
+  }
+  
+  .negative {
+    color: #dc3545;
+  }
+  
+  .neutral {
+    color: #6c757d;
+  }
+
+  .sort-arrow {
+    margin-left: 5px;
+  }
+
+  .highlighted-header {
+    background-color: #0056b3; 
+    color: #fff; 
+  }
+  
+  /* Responsive table */
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      display: none;
+    }
+  
+    table tr {
+      margin-bottom: 10px;
+      display: block;
+      border-bottom: 2px solid #ddd;
+    }
+  
+    table td {
+      display: block;
+      text-align: right;
+      font-size: 0.8em;
+      border-bottom: 1px dotted #ccc;
+    }
+  
+    table td:last-child {
+      border-bottom: 0;
+    }
+  
+    table td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      color: #007bff;
+    }
+  
+    /* Make the table less dense on smaller screens */
+    table, th, td {
+      padding: 10px;
+    }
   }
   

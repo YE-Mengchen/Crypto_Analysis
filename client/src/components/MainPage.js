@@ -1,5 +1,4 @@
 // MainPage.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css'; 
@@ -13,29 +12,32 @@ const MainPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); // 开始加载数据
+        setLoading(true);
         const response = await axios.get(`http://localhost:5000/api/data/sorted-cryptos?sortOrder=${sortOrder}&sortBy=${sortBy}`);
         setCryptoData(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [sortOrder, sortBy]);
 
-  const getColor = (value) => {
-    if (value > 0) return 'green';
-    if (value < 0) return 'red';
-    return 'black'; 
+  const getColorClass = (value) => {
+    if (value > 0) return 'positive';
+    if (value < 0) return 'negative';
+    return 'neutral'; 
   };
 
+  const renderSortArrow = (column) => {
+    return sortBy === column ? (sortOrder === 'desc' ? '↓' : '↑') : '';
+  };
 
   return (
     <div>
-      <h1>MainPage</h1>
+      <h1>Cryptocurrency Market Dashboard</h1>
       <div>
         <label htmlFor="sortOrder">Sort Order:</label>
         <select id="sortOrder" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
@@ -55,19 +57,31 @@ const MainPage = () => {
         </select>
       </div>
       {loading ? (
-        <p className="loading">Loading...</p>
+        <p className="loading">Loading... Up to 10 seconds</p>
       ) : (
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Symbol</th>
-              <th>Price</th>
-              <th>Volume</th>
-              <th>Market Cap</th>
-              <th>24h Change</th>
-              <th>7d Change</th>
-              <th>30d Change</th>
+              <th className={sortBy === 'close' ? 'highlighted-header' : ''}>
+                Price {renderSortArrow('close')}
+              </th>
+              <th className={sortBy === 'volume' ? 'highlighted-header' : ''}>
+                Volume {renderSortArrow('volume')}
+              </th>
+              <th className={sortBy === 'marketcap' ? 'highlighted-header' : ''}>
+                Market Cap {renderSortArrow('marketcap')}
+              </th>
+              <th className={sortBy === 'oneDayChange' ? 'highlighted-header' : ''}>
+                24h Change {renderSortArrow('oneDayChange')}
+              </th>
+              <th className={sortBy === 'sevenDayChange' ? 'highlighted-header' : ''}>
+                7d Change {renderSortArrow('sevenDayChange')}
+              </th>
+              <th className={sortBy === 'thirtyDayChange' ? 'highlighted-header' : ''}>
+                30d Change {renderSortArrow('thirtyDayChange')}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -78,9 +92,15 @@ const MainPage = () => {
                 <td>{crypto.close}</td>
                 <td>{crypto.volume}</td>
                 <td>{crypto.marketcap}</td>
-                <td style={{ color: getColor(crypto.oneDayChange) }}>{crypto.oneDayChange}%</td>
-                <td style={{ color: getColor(crypto.sevenDayChange) }}>{crypto.sevenDayChange}%</td>
-                <td style={{ color: getColor(crypto.thirtyDayChange) }}>{crypto.thirtyDayChange}%</td>
+                <td className={getColorClass(crypto.oneDayChange)}>
+                  {crypto.oneDayChange}%
+                </td>
+                <td className={getColorClass(crypto.sevenDayChange)}>
+                  {crypto.sevenDayChange}%
+                </td>
+                <td className={getColorClass(crypto.thirtyDayChange)}>
+                  {crypto.thirtyDayChange}%
+                </td>
               </tr>
             ))}
           </tbody>

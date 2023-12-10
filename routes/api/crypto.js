@@ -39,9 +39,10 @@ router.get('/', async (req, res) => {
   
       // Fetch filtered data from the database
       let cryptos = await Crypto.find(query);
-  
+
+
       // If sortBy and sortOrder are defined, sort the data accordingly
-      if (sortBy && sortOrder) {
+      if (sortBy) {
         cryptos = cryptos.sort((a, b) => {
           const fieldA = a[sortBy];
           const fieldB = b[sortBy];

@@ -1,23 +1,32 @@
 // MainPage.js
+
+// Import React hooks and axios for making API requests
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css'; 
 
 const MainPage = () => {
+  // State hook for storing cryptocurrency data
   const [cryptoData, setCryptoData] = useState([]);
+  // State hook for loading state to show loading text when fetching data
   const [loading, setLoading] = useState(false);
+  // State hooks for sortOrder and sortBy to manage the sorting of cryptocurrency data
   const [sortOrder, setSortOrder] = useState('desc');
   const [sortBy, setSortBy] = useState('marketcap');
 
+  // Effect hook to fetch data on component mount and when sortOrder or sortBy changes
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Indicate loading process has started
         setLoading(true);
         const response = await axios.get(`http://localhost:5000/api/data/sorted-cryptos?sortOrder=${sortOrder}&sortBy=${sortBy}`);
+        // Store the fetched data in the state
         setCryptoData(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
       } finally {
+        // Indicate that loading process has finished
         setLoading(false);
       }
     };
@@ -25,16 +34,19 @@ const MainPage = () => {
     fetchData();
   }, [sortOrder, sortBy]);
 
+    // Function to determine the CSS class based on the value's sign
   const getColorClass = (value) => {
     if (value > 0) return 'positive';
     if (value < 0) return 'negative';
     return 'neutral'; 
   };
 
+   // Function to render the sorting arrow based on current sorting column and order
   const renderSortArrow = (column) => {
     return sortBy === column ? (sortOrder === 'desc' ? '↓' : '↑') : '';
   };
 
+  // The JSX for rendering the component on the screen
   return (
     <div>
       <h1>Cryptocurrency Market Dashboard</h1>

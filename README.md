@@ -7,16 +7,38 @@ This take-home project is part of interview, provides a comprehensive dashboard 
 
 ## Features Implemented
 
-The project meets several requirements outlined in the initial challenge:
+The project successfully addresses several key requirements outlined in the project requirements:
 
-- **Data Ordering and Display**: Cryptocurrencies are ordered by market cap in descending order and display relevant attributes such as Price, 24h change, 7d change, 30d change, Volume, and Market Cap.
-- **Technology Stack**: The project makes use of ReactJS for the frontend and Node.js for the backend, with MongoDB Atlas database for data persistence.
-- **API Utilization**: The backend retrieves data from a database and processes it efficiently, making it available via RESTful APIs.
-- **Frontend Design**: The data is displayed in a user-friendly web page using React components.
-- **Code Quality**: The code follows best practices, including clear and concise test, comment and following Camel case for variables.
-- **Caching Strategy** Come up with a caching strategy to fit into the solution, please check it in this repo, it is a pdf
-  
-Please note that only one optional implement not done: Docker and AWS integration is not included in this deployment. I was busy last week, so I have limit time to learn aws and instead I have to deploy the project on render.
+- **Data Ordering and Display**: 
+  - Cryptocurrencies can be ordered by market cap in a user-specified order (ascending or descending).
+  - Displays relevant attributes such as Price, 24h change, 7d change, 30d change, Volume, and Market Cap.
+  - Users have the flexibility to choose the attribute by which the data is ordered.
+
+- **Technology Stack**: 
+  - Frontend developed using ReactJS.
+  - Backend developed using Node.js.
+  - MongoDB Atlas used for data persistence.
+  - Python and Jupyter Notebook are utilized for processing and pre-processing CSV data, including tasks like checking for null values before uploading to MongoDB Atlas.
+
+- **API Utilization**: 
+  - Backend efficiently retrieves and processes data from the database.
+  - Data made available through RESTful APIs.
+  - Includes capabilities for sorting, filtering, and customizing data retrieval based on user preferences.
+
+- **Frontend Design**: 
+  - Frontend design enhanced with the assistance of ChatGPT-4 for CSS code modification.
+  - Visually appealing and user-friendly web page using React components.
+
+- **Code Quality**: 
+  - Adheres to best coding practices.
+  - Code is free from hardcoding and ensures extensibility.
+  - Facilitates easy implementation of additional features like custom date selection with minimal changes to the existing codebase.
+
+- **Caching Strategy**: 
+  - Implemented a caching strategy to optimize data retrieval and performance.
+  - Detailed documentation available in a PDF within this repository.
+
+**Note**: Docker and AWS integration, not included in this deployment, are considered as potential future enhancements. The current deployment is hosted on Render due to time constraints.
 
 ## API Usage
 
